@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+- Example shows drawing strings on the canvas and
+  dragging individual strings around with the mouse.
+  
+  In this example the HTML elements are not being
+  dragged. The strings are javascript objects.
+  
+  When the canvas reacts to the mouse down event
+  other event handlers will be added to the DOM
+  to handle the mouse move and mouse release
+  
+  Notice in this source file there are no pre-attached
+  event handlers. They will be added using jQuery in the
+  supporting javascript file.
+
+
+-->
+<html>
+   <head>
+     <title>Canvas Size</title>
+     <script src="jquery-1.11.3.js"></script>
+     <h1> <ins>Assignment # 1 - Javascript based Single Page App</ins></h1>
+     <p style="font-size:110%"><a href="http://people.scs.carleton.ca/~ldnel/2406fall2015/assignments/Assignment01/2406fall2015Assignment1%20rev2.html" target="_blank">Requirnments for this Assignment, Click Here!</a></p>
+    <a href="http://www.chordie.com/" target="_blank">To Generate more chord files, Click Here!</a> 
+      <style> 
+      a:link {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+    }
+    a:visited {
+    color: purple;
+    background-color: transparent;
+    text-decoration: none;
+    }
+    a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+    }
+    a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+    }
+      p#p01 {
+           border:1px solid grey;
+           padding:10px;
+           /*margin:30px;*/
+        }
+         body {
+            background: #dddddd;
+         }
+		 
+		 /*element selectors: */
+		 canvas {
+		    margin: 20px;
+			/*important here for padding to be 0 for mouse calculations */
+            padding: 0px; 
+		 }
+		 /* class selectors: */
+		 .canvas {            
+            background: #ffffff;
+            text-align:center;
+            border: thin inset #aaaaaa;
+
+         }
+
+         /*id selectors: */
+		 
+         #canvas1 {
+         }
+		  
+ 
+      </style>
+   </head>
+
+  <body>
+    <canvas id='canvas1' class='canvas' width='800' height='450'>
+      Canvas not supported
+    </canvas> 
+    <br>
+    <input type = "text"  id="userTextField" name = "userTextField"  value="" size = "60" />
+    <input type="button" value="Open" onClick="handleSubmitButton()">
+    <input type="button" value="Save" onClick="handleSaveButton()">
+    <p style="color:red"> <b>Display Songs:</b> Type the title of the file extension (without .txt), then click Open to display lyrics/chords </p>
+    <p style="color:red"> <b>Saving Songs:</b> Type the title of the file name, then click 'Save'. Based on the Title, the file will be saved as TitleName.txt </p>
+    <p>
+    <p id="p01"> <b>Authors:</b> Charles Bimm (100972986), Arzaan Irani (100826631) </p>
+   
+
+    <!-- <p>To open a file, select:</p>
+
+      <p><kbd>File | Open...</kbd></p>
+      The kbd element represents keyboard input:
+
+      File | Open... -->
+
+
+    <script src='canvasWithTimer.js'></script>
+  </body>
+</html>

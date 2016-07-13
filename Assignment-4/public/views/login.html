@@ -1,0 +1,26 @@
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+<div class="container">
+  <div class="login--open">
+   <div class="login__header" >
+     Carleton Exams Center
+    </div>
+    <div class="login_form">
+      <div class="login__fields">
+        <div class="field">
+          <input type="text" id="fieldName" class="input" required ng-model="user.name"  />
+          <label for="fieldName" class="label">Student Name</label>
+        </div>
+        <div class="field">
+          <input type="text" id="fieldNumber" class="input" required ng-model="user.number"/>
+          <label for="fieldNumber" class="label">Student Number</label>
+        </div>
+        <div class="error" ng-show="invalidCredentials">
+        	Invalid Login Credentials
+        </div>
+        <div class="login__footer">
+          <button class="btn" ng-click="login(user)" >Login</button>
+        </div>
+      </div>
+     </div>
+  </div>
+</div>

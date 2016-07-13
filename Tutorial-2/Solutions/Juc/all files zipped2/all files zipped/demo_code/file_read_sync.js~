@@ -1,0 +1,54 @@
+
+/*
+Example of a SYNCHRONOUS file read.
+the readFileSync() function blocks (waits) and only returns once the file is read.
+
+See
+http://nodejs.org/api/fs.html
+and more specifically: http://nodejs.org/api/fs.html#fs_fs_readfilesync_filename_options
+
+*/
+
+var fs = require('fs'); 
+var array = fs.readFileSync('songs/sister_golden_hair.txt').toString().split("\n");
+//console.log(array[i].length);
+//console.log("=" + array[i]); console.log("=");
+var spcarray;
+for (i=0; i<array.length; i++){
+  array2 = array[i].split(" ");
+  for (k=0; k<array2.length; k++){
+      if (array2[k].charAt(0) == "[") spcarray += array2[k];
+      var trk = 0;
+      while (trk < array2[k].length){
+        spcarray += " ";
+        trk++;
+        }
+  }
+  spcarray += "\n";
+  for (k=0; k<array2.length; k++){
+      if (array2[k].charAt(0) != "["){
+        spcarray += array2[k];
+        spcarray += " ";
+      }
+      else{
+        spcarray += "  ";
+      }
+
+  }
+  spcarray += "\n";
+}
+//console.log(spcarray);
+
+spcarray = spcarray.split("\n");
+var line = 1;
+var colour = require('colour');
+for(i=0; i<spcarray.length; i++){
+  if (line == 1) {
+    console.log(spcarray[i].red);
+    line += 1;
+  }
+  else{
+    console.log(spcarray[i].green);
+    line -=1;
+  }
+};

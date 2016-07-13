@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC>
+  <head> 
+   <script type="text/javascript" src="jquery-1.11.3.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+
+    <style>
+    .value {
+        color: green;
+        font-weight: bold;;
+    }
+    p#p01 {
+        border:1px solid gray;
+        padding:10px;
+           /*margin:30px;*/
+    }
+        body {
+            background: #dddddd;
+    }
+    </style>
+  </head>
+  <html>
+  <body>
+
+    <h1 style="font-family:Arial Black"> <ins>Assignment # 3 - Node.js Internet Of Things (Thermostat Controls)</ins></h1>
+
+
+     <p style="font-size:110%"><a href="http://people.scs.carleton.ca/~ldnel/2406fall2015/assignments/Assignment03/2406fall2015Assignment3.html" target="_blank">Requirnments for this Assignment, Click Here!</a></p>
+
+    <div style="display:block">
+        <button onclick="refresh">Refresh</button>
+    </div>    
+    <hr>
+    
+    <div style="display:inline-block;float:left;padding-right:6px">
+        <button type="submit" onclick="increaseThermostTemp()">
+            <img src="images/arrow-up.png"/>
+        </button>
+        Increase Desired Temperature
+
+    </div>
+
+    <div style="display:block;padding-right:6px">
+        <h2 style="color:red" title="Current Temperture">Current Temperature: <span id="currentTemp"></span></h2>
+    </div>
+
+
+    <div style="display:block;padding-right:6px">
+        <h2 style="color:red" title="Current Temperture">Furnace State: <span id="furnaceState"></span></h2>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div style="display:block;float:left;padding-right:6px">
+        <button onclick="decreaseThermostTemp()">
+            <img src="images/arrow-down.png"/>
+        </button>
+        Descrease Desired Temperature
+    </div>
+    <div style="display:block;float:left;padding-right:6px">
+        <h2 title="Desired Temperature">Desired Temperature: <span id="desiredTemp"></span></h2>
+    </div>
+
+    <br>
+    <br>
+        <br>
+    <br>
+        <br>
+    <br>
+        <br>
+    <br>
+    <div style="display:block;float:left;padding-right:6px">
+
+    <h1><ins>Current Weather<ins></h1>
+        <p>
+            <span id="description"></span><br>
+            The current outdoor temperature is:<span class="value" id="out_temp"></span>  <br>
+            Minimum Temperature: <span class="value" id="temp_min"></span><br>
+            Maximum Temperature: <span class="value" id="temp_max"></span><br>
+            Sea Level: <span class="value" id="sea_level"></span><br>
+            Ground Level: <span class="value" id="ground_level"></span><br>
+            The current outdoor humidity is:  <span class="value" id="humidity"></span>  <br>
+            The current weather outside is: <span class="value" id="general"></span> <br>
+        </p>
+        <p id="p01"> <b>Authors:</b> Charles Bimm (100972986), Arzaan Irani (100826631) </p>
+    </div>
+  </body>
+</html>

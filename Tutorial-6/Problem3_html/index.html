@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+- Example shows drawing strings on the canvas and
+  dragging individual strings around with the mouse.
+  
+  In this example the HTML elements are not being
+  dragged. The strings are javascript objects.
+  
+  When the canvas reacts to the mouse down event
+  other event handlers will be added to the DOM
+  to handle the mouse move and mouse release
+  
+  Notice in this source file there are no pre-attached
+  event handlers. They will be added using jQuery in the
+  supporting javascript file.
+
+
+-->
+<html>
+   <head>
+     <script src="jquery-1.11.3.js"></script>
+     <h1> <ins>Thermostat</ins></h1>
+     <style> 
+      p#p01 {
+           border:1px solid grey;
+           padding:10px;
+           /*margin:30px;*/
+        }
+         body {
+            background: #dddddd;
+         }
+		 
+		 /*element selectors: */
+
+      </style>
+   </head>
+
+  <div class="actions">
+    <button id="Increase-button">Increase Temp.</button>
+    <br>
+    <br>
+    <button id="Decrease-button">decrease Temp.</button>
+  </div>
+
+    <!-- <p>To open a file, select:</p>
+
+      <p><kbd>File | Open...</kbd></p>
+      The kbd element represents keyboard input:
+
+      File | Open... -->
+
+</html>

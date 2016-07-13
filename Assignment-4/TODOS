@@ -1,0 +1,23 @@
+1) Design database and models
+2) Login Page(Enter student name and student number). index.html
+3) Once logged in intro.html containing start button. On click take to test.html
+4) Test creation pages
+
+
+[DONE] Step 1: Setup express js, sequlize and sqlite database basic with all the dependencies. [15 min]
+[DONE] Step 2.0: setup user table [15 min]
+[DONE] Step 2.1: Setup basic app architecture [18 min]
+[DONE] Step 2.2: Backend support for login, logout, isloggedin, session [50 min]
+[DONE] Step 2.3: Setting up routes at the front-end [25 mins]
+[DONE] Step 2.4: Setup basic login page and do user authentication and show intro page to logged in users.[25 mins]
+[DONE] Step 3.1: Decide the database structure and setup models for the same.[40 mins]
+[DONE] Step 3.2: Show Instructions and On Clicking the Instructions go to test view [25 min]
+[DONE] Step 3.3: Setup navigation through questions
+[DONE] Step 6: Add support for recording the test response for the user
+[DONE] Step 7: Setup Hint Server
+
+UI Design
+
+[DONE] 1) Login Page Design with error message
+[DONE] 2) Intro Page Design
+[DONE] 3) QUestion Answer Design

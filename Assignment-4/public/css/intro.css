@@ -1,0 +1,47 @@
+body {
+  position: relative;
+  margin: 0;
+  font-family: 'Work Sans', Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  background: linear-gradient(to bottom, #68EACC 0%, #497BE8 100%);
+  color: #777;
+}
+#box
+{
+  margin: auto;
+  left:0; right:0;
+  top:0; bottom:0;
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: white;
+  text-align: center;
+
+}
+
+.btn {
+    border: 0;
+    font-size: 0.75rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    padding: 0 1.5rem;
+    color: white;
+    background: #8E49E8;
+    text-transform: uppercase;
+    border-radius: .25rem;
+    letter-spacing: .2em;
+    transition: background .2s;
+        cursor: pointer
+}
+
+.intro_main{
+    margin: 45px;
+    text-align: left;
+}
+.intro_main > *{
+    padding: 5px; 
+
+}
+.intro_footer {
+  padding-top: 1em;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "comp2406a",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Furnace.js",
+  "dependencies": {
+    "express": "^4.13.3",
+    "is-property": "^1.0.2",
+    "request": "^2.65.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

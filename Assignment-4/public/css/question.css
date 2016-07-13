@@ -1,0 +1,97 @@
+/* Variables */
+/* Icon Font */
+
+
+/* Layout */
+html {
+  background-color: #e9e7f5;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+h3 {
+  color: #4e516a;
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0 0 1.8rem 0;
+  text-align: center;
+}
+/* Questions Component */
+.questions {
+  margin: 1rem auto;
+  padding: 2rem;
+  width: 28rem;
+}
+.question-buttons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.question-buttons li {
+  background-color: white;
+  border-radius: 4rem;
+  margin: 1rem 0;
+  width: 80%;
+}
+
+.question-buttons li .selected{
+  background-color: rgb(220, 220, 222);
+  border-radius: 4rem;
+  margin: 1rem 0;
+  width: 80%;
+}
+
+.question-buttons li:hover,
+.question-buttons li:active {
+  box-shadow: 2px 2px 2px #c8c3e6;
+}
+.question-buttons a {
+  display: block;
+  font-size: 1.2rem;
+  padding: 1.2rem 1.2rem 1.2rem 6rem;
+  position: relative;
+  text-decoration: none;
+}
+.question-buttons a:before {
+  border-radius: 50%;
+  display: block;
+  font-size: 2.8rem;
+  line-height: 1.2rem;
+  left: 1.8rem;
+  height: 3rem;
+  position: absolute;
+  text-align: center;
+  top: 1.4rem;
+  width: 3rem;
+}
+.question-buttons a.green {
+  color: #40d47c;
+}
+.question-buttons a.blue {
+  color: #62b6df;
+}
+.question-buttons a.red {
+  color: #fb7e68;
+}
+
+.buttons{
+    text-align: center;
+}
+
+.buttons > *{
+    display: inline;
+    padding: 15px;
+
+}
+
+.buttons li {
+  background-color: white;
+  border-radius: 10px;
+  margin: 1rem 0;
+  width: 100%;
+  text-decoration: blink;
+}
+
+.hints{
+    text-align: center;
+    margin-bottom:25px;
+}

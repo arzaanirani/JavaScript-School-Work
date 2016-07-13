@@ -1,0 +1,26 @@
+<div class="questions">
+    <h3>{{question.text}}</h3>
+    <ul class="question-buttons">
+     <li ng-repeat="choice in choices">
+     <a href="#" class="{{optionColorClass[$index]}}" ng-class="{selected:choice==userchoice}" ng-click="recordResponse(question, choice)"
+     >{{choice.text}}</a>
+   	</li>
+    </ul>
+</div>
+
+<div class="hints">
+	<div ng-show="hintRequested || hintsAvailable.value">
+		<p>{{hintsAvailable.count}}  Hints  available</p>
+		Is Answer for this question <select ng-model="hintChoice" ng-options="choice as choice.text for choice in choices">
+		</select>
+		<input type="button" value="Get hint" ng-click="getHint(question.id, hintChoice.id);hintRequested=true"/>
+	</div>
+	<div ng-show="hintRequested && hintResponse!==null">
+
+	Response: {{hintResponse|yesNo}}
+	</div>
+	<div ng-show="!hintRequested && hintsAvailable && !hintsAvailable.value">
+		All Hints utilized
+	</div>
+</div>
+

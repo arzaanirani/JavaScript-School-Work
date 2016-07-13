@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>Canvas Size</title>
+     <script src="jquery-1.11.3.js"></script>
+     <h1 style="font-family:Arial Black"> <ins>Assignment # 2 - Collaborative Single Page App</ins></h1>
+
+
+     <p style="font-size:110%"><a href="http://people.scs.carleton.ca/~ldnel/2406fall2015/assignments/Assignment02/2406fall2015Assignment2.html" target="_blank">Requirnments for this Assignment, Click Here!</a></p>
+
+      
+      <style>
+      p#p01 {
+           border:1px solid gray;
+           padding:10px;
+           /*margin:30px;*/
+        }
+         body {
+            background: #dddddd;
+         }
+     
+     /*element selectors: */
+     canvas {
+        margin: 20px;
+      /*important here for padding to be 0 for mouse calculations */
+            padding: 0px; 
+     }
+     /* class selectors: */
+     .canvas {            
+            background: white;
+            text-align:center;
+            border: thin inset #aaaaaa;
+
+         }
+
+           /*id selectors: */
+       
+           #canvas1 {
+           }
+    </style>
+
+  </head>
+  <body>
+    
+    <canvas id='canvas1' class='canvas' width='500' height='500'>
+      Canvas not supported
+    </canvas> 
+
+    <!--<input type='text' placeholder='Player 1' id='msgBox' onkeypress ='return handleKeyPress(event)'> -->
+	
+	<table>
+    <tr>
+        <p style="color:red"> <b>Enter each Player's name and press enter:</b></p>
+        <td><input type="text" placeholder="Enter Player 1 name" id="player1msgbox" onkeypress ='return handleKeyPress(event)' value="" ></input></td>
+        <td><input type="text" placeholder="Enter Player 2 name" id="player2msgbox" onkeypress ='return handleKeyPress(event)' value="" ></input></td>
+
+    </tr>
+    </table>  
+
+    <script>
+
+      var letterBeingMoved;
+      var deltaX, deltaY;
+      var currPlayer = "";
+      var player1 = "";
+      var player2 = "";
+
+      var canvas = document.getElementById('canvas1');
+      var context = canvas.getContext('2d');
+      var context1 = canvas.getContext('2d');
+
+      var xOArr = [];
+      xOArr.push({word: "X", x: 30, y: 150, grabbed: false, index: 0});
+      xOArr.push({word: "X", x: 30, y: 200, grabbed: false, index: 1});
+      xOArr.push({word: "X", x: 30, y: 250, grabbed: false, index: 2});
+      xOArr.push({word: "X", x: 30, y: 300, grabbed: false, index: 3});
+      xOArr.push({word: "X", x: 30, y: 350, grabbed: false, index: 4});
+      xOArr.push({word: "O", x: 435, y: 150, grabbed: false, index: 5});
+      xOArr.push({word: "O", x: 435, y: 200, grabbed: false, index: 6});
+      xOArr.push({word: "O", x: 435, y: 250, grabbed: false, index: 7});
+      xOArr.push({word: "O", x: 435, y: 300, grabbed: false, index: 8});
+
+
+/*
+  Sends the player information to the server.
+*/
+    function sendMessage() {
+        var player1message = document.getElementById('player1msgbox').value;
+        var player2message = document.getElementById('player2msgbox').value;
+        document.getElementById('player2msgbox').value
+        if(player1 === "" && currPlayer === "") {
+          currPlayer = player1message;
+          player1 = player1message;
+          disable();
+        }
+
+        if (player2 === "" && currPlayer === "") {
+          currPlayer = player2message;
+          player2 = player2message;
+          disable();
+        }
+
+        ws.send(JSON.stringify( {"player1": player1, "player2": player2} ));
+        //clears it
+        //document.getElementById('player1msgbox').value = '';
+        //document.getElementById('player2msgbox').value = '';        
+      }
+
+    function disable() {
+      document.getElementById("player1msgbox").disabled = true;
+      document.getElementById("player2msgbox").disabled = true;
+    }
+    
+    /*
+      Checks to see if the client hits the enter key when submitting
+      their name.
+    */
+    function handleKeyPress(event){
+      if(event.keyCode == 13){
+        sendMessage();
+        return false; //don't propogate event
+      }
+    }
+    /*
+      The initialization of the web socket.
+    */
+    var ws = new WebSocket('ws://' + window.document.location.host);
+      
+      /*
+        The on message function takes messages from the client, and does
+        some simple checking to see if the word being used is grabbed and
+        to set up the player1 and player2 name if they aren't used yet.
+      */
+      ws.onmessage = function(message) {
+        var recieve = JSON.parse(message.data);
+        
+        if (recieve.grabbed) {
+          xOArr[recieve.index].x = recieve.x;
+          xOArr[recieve.index].y = recieve.y;
+        }
+
+        if (recieve.player1 && recieve.player1 !== "") {
+          player1 = recieve.player1;
+          console.log(player1);
+        }
+
+        if (recieve.player2 && recieve.player2 !== "") {
+          player2 = recieve.player2;
+          console.log(player2);
+        }
+      };
+    
+    /*
+      Gets the location of the X and O positions so that they can
+      be used and their positions updated.
+    */
+    function getXOLocation(aCanvasX, aCanvasY){
+
+            var context = canvas.getContext('2d');
+
+            for(var i=0; i<xOArr.length; i++){
+
+               if(aCanvasX < (xOArr[i].x + context.measureText(xOArr[i].word).width) &&
+                  aCanvasX > xOArr[i].x &&
+                  (xOArr[i].y - aCanvasY) < 50 &&
+                  (xOArr[i].y - aCanvasY > 0)) return xOArr[i];
+            }
+            return null;
+    }
+	
+  /*
+    Draws the game board on the canvas.
+  */
+	function drawGameBoard() {
+
+  // Drawing vertical line 1
+      context.lineWidth = 10;
+      context.beginPath();
+      context1.font = '20pt TimesNewRoman';
+      context1.fillStyle = 'Red';
+      context1.fillText(player1,0,95);
+      context.moveTo(300, 100);
+      context.lineTo(300, 430);
+      context.stroke();
+ 
+      // Drawing vertical line 2
+      context.beginPath();
+      context1.font = '20pt TimesNewRoman';
+      context1.fillStyle = 'Red';   
+      context1.fillText(player2,410,95);       
+      context.moveTo(200, 100);
+      context.lineTo(200, 430);
+      context.stroke();
+ 
+      // Drawing horizontal line 1
+      context.fillStyle = 'blue';
+      context.beginPath();
+      context.moveTo(100, 210);
+      context.lineTo(410, 210);
+      context.stroke();
+ 
+      // Drawing horizontal line 2
+      context.beginPath();
+      context.moveTo(100, 315);
+      context.lineTo(410, 315);
+      context.stroke();
+    }
+
+      /*
+        Draws the Xs and Os based on hard coded positions. 
+        The positions are updated as the clients move the X and 
+        O positions.
+      */
+      function drawCanvas() {
+          
+          context.fillStyle = 'white';
+          context.strokeStyle = 'black';
+          context.fillRect(0,0,canvas.width, canvas.height);
+
+          context.font = '40pt Arial';
+          context.fillStyle = 'blue';
+          context.lineWidth = 2;
+
+
+          for(var i=0; i<xOArr.length; i++){  //note i declared as var
+                  
+                  var data = xOArr[i];
+                  context.fillText(data.word, data.x, data.y);
+                  context.strokeText(data.word, data.x, data.y);
+              
+          }
+		  drawGameBoard();
+      }
+
+      function handleTimer () {
+          drawCanvas();
+      }
+
+      /*
+        Tracks the positions of the mouse and updates the positon of the Xs
+        and Os if the mouse grabs one of them. Jquery is used to tack mouse movements
+        (the mouse moving and the button being released). 
+      */
+      function handleMouseDown(e) {
+
+          var rect = canvas.getBoundingClientRect();
+          var canvasX = e.pageX - rect.left; //use jQuery event object pageX and pageY
+          var canvasY = e.pageY - rect.top;
+          console.log("mouse down:" + canvasX + ", " + canvasY);
+          
+          letterBeingMoved = getXOLocation(canvasX, canvasY);
+          
+          if(letterBeingMoved != null ){
+             deltaX = letterBeingMoved.x - canvasX; 
+             deltaY = letterBeingMoved.y - canvasY;
+          }
+
+          $("#canvas1").mousemove(handleMouseMove);
+          $("#canvas1").mouseup(handleMouseUp);
+
+          e.stopPropagation();
+          e.preventDefault();
+      }
+
+      /*
+        Handles the mouse movements for the Xs and Os if the letter being
+        moved is not null (the player actually clicks and X or O). The if
+        statements check if player 1 or player 2 is grabbing the respective
+        X or O. Only player 1 can grab the Xs and only player 2 can grab the Os. 
+      */
+      function handleMouseMove(e){
+          
+          console.log("mouse move");
+          
+          //get mouse location relative to canvas top left
+          var rect = canvas.getBoundingClientRect();
+          var canvasX = e.pageX - rect.left;
+          var canvasY = e.pageY - rect.top;
+          
+          if (letterBeingMoved !== null && (letterBeingMoved.x !== null && letterBeingMoved.y !== null)) {
+
+            if(letterBeingMoved.word === "X" && player1 === currPlayer && (player1 !== "" && player2 !== "")){
+              letterBeingMoved.x = canvasX + deltaX;
+              letterBeingMoved.y = canvasY + deltaY;
+              letterBeingMoved.grabbed = true;
+            }
+            if(letterBeingMoved.word === "O" && player2 === currPlayer && (player1 !== "" && player2 !== "")){
+              letterBeingMoved.x = canvasX + deltaX;
+              letterBeingMoved.y = canvasY + deltaY;
+              letterBeingMoved.grabbed = true;
+            }
+              var movingWord = JSON.stringify(letterBeingMoved);
+              ws.send(movingWord)
+          }         
+          e.stopPropagation();
+          
+          drawCanvas();
+      }
+
+      /*
+        Handles when the mouse button is released using jquery.
+      */
+      function handleMouseUp(e){
+          console.log("mouse up");
+              
+          e.stopPropagation();
+
+          if (letterBeingMoved){letterBeingMoved.grabbed = false;}
+          
+          //$("#canvas1").off(); //remove all event handlers from canvas
+          //$("#canvas1").mousedown(handleMouseDown); //add mouse down handler
+
+          //remove mouse move and mouse up handlers but leave mouse down handler
+          $("#canvas1").off("mousemove", handleMouseMove); //remove mouse move handler
+          $("#canvas1").off("mouseup", handleMouseUp); //remove mouse up handler
+              
+          drawCanvas(); //redraw the canvas
+      }
+
+      $(document).ready(function(){
+
+          $("#canvas1").mousedown(handleMouseDown);
+
+          timer = setInterval(handleTimer, 50); 
+          
+      });
+
+    </script>
+    <p id="p01"> <b>Authors:</b> Charles Bimm (100972986), Arzaan Irani (100826631) </p>
+    <!--
+    Messages:
+    <div id='messages'></div>
+    <input type='text' placeholder='Send a message' id='msgBox' onkeypress ='return handleKeyPress(event)'>
+    <input type='button' onclick='sendMessage()' value='Send'>
+    -->
+
+  </body>
+</html>
